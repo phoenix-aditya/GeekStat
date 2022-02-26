@@ -1,5 +1,5 @@
 import pickle
-from gen_usr import *
+from scripts.gen_usr import generate_usr_file
 from random import sample, shuffle
 
 def get_avg_level(level_solved):
@@ -30,9 +30,10 @@ def suggested_q_level(avg_lvl):
 
 
 def recommend_q(usr):
-    generate_usr_file(usr)
+    if generate_usr_file(usr) == False:
+        return []
 
-    read_file = open("../database/"+usr+".pkl", "rb")
+    read_file = open("database/"+usr+".pkl", "rb")
     usr_data = pickle.load(read_file)
     
     problems = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
@@ -47,7 +48,7 @@ def recommend_q(usr):
                 else:
                     level_solved[difficulty] += int(usr_data['category_count'][category][difficulty])  
 
-    read_file = open("../problem_set/problem_set.pkl", "rb")
+    read_file = open("problem_set/problem_set.pkl", "rb")
     problem_set = pickle.load(read_file)
 
     all_categories = list(problem_set.keys())

@@ -39,11 +39,9 @@ def generate_usr_file(usr):
                     else:
                         usr_data['category_count'][tag][prlbm['index']]+=1
 
-    file = open("../database/"+usr+".pkl", "wb")
+    file = open("database/"+usr+".pkl", "wb")
     pickle.dump(usr_data, file)
     file.close()
     
-    return True
+    return usr_data
 
-if __name__=="__main__":
-    generate_usr_file("adi_13")
