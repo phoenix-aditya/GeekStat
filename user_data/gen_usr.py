@@ -46,4 +46,4 @@ def generate_usr_file(usr):
     return True
 
 if __name__=="__main__":
-    generate_usr_file("adi_13")
+    generate_usr_file("tourist")
