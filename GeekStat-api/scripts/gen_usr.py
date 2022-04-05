@@ -3,6 +3,7 @@ import requests
 import json
 import pickle
 
+
 def generate_usr_file(usr):
     res = requests.get(
         "https://codeforces.com/api/user.status?handle="+usr).json()
@@ -11,8 +12,6 @@ def generate_usr_file(usr):
         return False
     
     usr_data = {}
-    usr_data['codeforces'] = 'True'
-
     usr_info = requests.get(
         "https://codeforces.com/api/user.info?handles="+usr).json()
     usr_data['cf_rating'] = usr_info['result'][0]['rating']
@@ -39,18 +38,24 @@ def generate_usr_file(usr):
                         usr_data['category_count'][tag][prlbm['index']] = 1
                     else:
                         usr_data['category_count'][tag][prlbm['index']]+=1
-
+    
+    # adding ratings from other platforms
     cf_rating_graph = [0]
     data = requests.get("https://codeforces.com/api/user.rating?handle="+usr).json()
     for i in data['result']:
         cf_rating_graph.append(i['newRating'])
-    usr_data['cf_rating_graph'] = cf_rating_graph
+    
+    usr_data['cf_graph'] = cf_rating_graph
+
+    file = open("database/"+usr+".pkl", "wb")
+    pickle.dump(usr_data, file)
+    file.close()
 
     file = open("database/"+usr+".pkl", "wb")
     pickle.dump(usr_data, file)
     file.close()
     
-    return True
+    return usr_data
 
 def gen_spoj_data(usr):
     usr_data={}
@@ -62,6 +67,8 @@ def gen_spoj_data(usr):
         usr_data['spoj_points'] = data['points']
         usr_data['spoj_rank'] = data['rank']
         usr_data['spoj_problem_solved'] = len(data['solved'])
+    else:
+        usr_data['spoj'] ='False'
     return usr_data
 
 def gen_atcoder_data(usr):
@@ -75,12 +82,18 @@ def gen_atcoder_data(usr):
         usr_data['atcoder_highest'] = data['highest']
         usr_data['atcoder_rank'] = data['rank']
         usr_data['atcoder_level'] = data['level']
+    else:
+        usr_data['atcoder'] = 'False'
     return usr_data
 
 def gen_leetcode_data(usr):
     usr_data={}
     #leetcode
     data = requests.get("https://competitive-coding-api.herokuapp.com/api/leetcode/"+usr).json()
+    if data['message'] == 'Internal Server Error':
+        usr_data['leetcode'] = 'False'
+        return usr_data
+    
     if data['status'] == 'Success':
         usr_data['leetcode'] = 'True'
         usr_data['leetcode_easy_questions_solved'] = data['easy_questions_solved']
@@ -93,10 +106,6 @@ def gen_leetcode_data(usr):
         usr_data['leetcode_total_easy_questions'] = data['total_easy_questions']
         usr_data['leetcode_total_medium_questions'] = data['total_medium_questions']
         usr_data['leetcode_total_hard_questions'] = data['total_hard_questions']
+    else:
+        usr_data['leetcode'] = 'False'
     return usr_data
-
-if __name__=="__main__":
-    generate_usr_file("tourist")
-    print(gen_atcoder_data("tourist"))
-    print(gen_leetcode_data("tourist"))
-    print(gen_spoj_data("tourist"))

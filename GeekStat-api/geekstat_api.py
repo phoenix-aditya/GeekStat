@@ -9,8 +9,19 @@ import sys
 from scripts.gen_usr import *
 from scripts.recommend_q import *
 
-sys.path.append('final_apis')
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = ["*"]
+
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # landing page
 @app.get("/")
@@ -36,3 +47,30 @@ def recommend_ques(usr : str):
 
 # use command pip list --format=freeze > requirements.txt
 # fast api location: http://127.0.0.1:8000/docs
+
+@app.get("/leetcode/{usr}")
+def leetcode_data(usr: str):
+    rec = gen_leetcode_data(usr)
+
+    if rec['leetcode'] == 'False':
+        return {"status":"Fail"}
+    else:
+        return {"status":"OK","data":rec}
+
+@app.get("/spoj/{usr}")
+def spoj_data(usr: str):
+    rec = gen_spoj_data(usr)
+
+    if rec['spoj'] == 'False':
+        return {"status":"Fail"}
+    else:
+        return {"status":"OK","data":rec}
+
+@app.get("/atcoder/{usr}")
+def atcoder_data(usr: str):
+    rec = gen_atcoder_data(usr)
+
+    if rec['atcoder'] == 'False':
+        return {"status":"Fail"}
+    else:
+        return {"status":"OK","data":rec}

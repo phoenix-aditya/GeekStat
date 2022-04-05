@@ -1,0 +1,58 @@
+.App {
+  background: #282c34;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.tile {
+  display: flex;
+  height: 10vw;
+}
+
+.h69 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.tiles {
+  width: 10vw;
+  flex-grow: inherit;
+  background-color: aqua;
+}
+
+.card1 {
+  margin: 1%;
+  padding: 3%;
+  width: 50vw;
+  height: 50vh;
+  background-color: aliceblue;
+}
+
+.card2 {
+  margin: 1%;
+  padding: 3%;
+  width: 50vw;
+  height: 50vh;
+  background-color: aliceblue;
+  overflow-y: scroll;
+}
+
+.cointainer {
+  margin: 1%;
+  background-color: bisque;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+
+.scroller {
+  display: flex;
+  flex-direction: column;
+}
