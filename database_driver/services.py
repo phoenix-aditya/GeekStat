@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from .database import database
+from bson.objectid import ObjectId
 
 def insert_document(
 	collection_name: str,
@@ -57,3 +58,39 @@ def return_latest_doc_in_collection(
 	last_inserted_doc = list(collection.find().sort("_id",-1).limit(1))[0]
 	return last_inserted_doc
 
+def return_doc_by_username(
+	collection_name : str,
+	username : str
+	):
+	'''
+	returns the document with the id in the
+	database
+	return None if document not found else the document
+	'''
+	collection = database[collection_name]
+
+	query = {'username': username}
+	filter = {'_id': 0}
+	
+	document = collection.find_one(query, filter)
+	
+	return document
+
+def update_document_by_username(
+	collection_name : str,
+	username : str,
+	document : dict
+	):
+	'''
+	function updates the document that has the
+	username set as username
+	'''
+	collection = database[collection_name]
+	query = {'username' : username}
+	updation = {'$set': document}
+
+	collection.update_one(
+		query,
+		updation,
+		upsert=False
+	)

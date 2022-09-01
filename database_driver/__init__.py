@@ -8,5 +8,7 @@ from .services import (
     insert_document,
     check_if_collection_exists,
     check_if_id_in_collection,
-    return_latest_doc_in_collection
+    return_latest_doc_in_collection,
+    return_doc_by_username,
+    update_document_by_username
 )

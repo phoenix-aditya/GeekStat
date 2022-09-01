@@ -1,8 +1,8 @@
 from schematics.models import Model
 from schematics.types import ListType, IntType, StringType
 
-class problem(Model):
-    _id = StringType()
+class Problem(Model):
+    pid = StringType()
     contestID = IntType()
     index = StringType()
     rating = IntType()
