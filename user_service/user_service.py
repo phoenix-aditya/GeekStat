@@ -1,9 +1,14 @@
+'''
+Main module of user_service package
+has all the functions required to generate and update codeforces user data
+'''
 import requests
 from models import User
 from database_driver import (
     return_doc_by_username, 
     insert_document,
-    update_document_by_username)
+    update_document_by_username
+    )
 
 
 def update_basic_info(user: User):
