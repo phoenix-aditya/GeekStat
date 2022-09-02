@@ -20,7 +20,7 @@ def generate_or_update_cf_problem_set():
     ).json()
 
     if res['status'] != "OK":
-        return
+        return False
     
     res = res['result']['problems']
 
@@ -84,6 +84,7 @@ def generate_or_update_cf_problem_set():
             list_of_document=new_problems
         )
 
+    return True
         
 
     

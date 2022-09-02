@@ -9,7 +9,7 @@ from database_driver import (
     return_doc_by_username,
     return_unique_values_in_field
     )
-from user_service import generate_and_update_user_details
+import user_service
 from statistics import mean
 
 def recommend_q_to_user(username:str):
@@ -20,7 +20,7 @@ def recommend_q_to_user(username:str):
     '''
     
     # update user profile on database
-    if generate_and_update_user_details(username=username) == False:
+    if user_service.generate_and_update_user_details(username=username) == False:
         return None
 
     # retrieve user profile from database

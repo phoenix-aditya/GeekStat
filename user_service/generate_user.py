@@ -9,7 +9,7 @@ from database_driver import (
     insert_document,
     update_document_by_username
     )
-
+import recommendation_service
 
 def update_basic_info(user: User):
     '''
@@ -55,7 +55,8 @@ def update_submission_info(user: User):
 
         user.cf_category_count = database_user_doc.cf_category_count
         user.cf_solved_questions_id = database_user_doc.cf_solved_questions_id
-    
+        user.recommended_questions = database_user_doc.recommended_questions
+
     temp = []
 
     for intel in usr_submission_status['result']:
@@ -124,12 +125,14 @@ def generate_and_update_user_details(username :str):
         collection_name="users", 
         username = user.username
         )
-
+    
+    
     if database_user_doc == None:
         insert_document(
             collection_name='users',
             document=user.to_primitive()
         )
+        recommendation_service.recommend_q_to_user(user.username)
 
     else:
         update_document_by_username(

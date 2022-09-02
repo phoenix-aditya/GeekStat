@@ -5,6 +5,5 @@ on the MongoDB database
 currently the package only supports codeforces but can be further extended to other
 platforms
 '''
-from .user_service import (
-    generate_and_update_user_details
-    )
+from .generate_user import generate_and_update_user_details
+
