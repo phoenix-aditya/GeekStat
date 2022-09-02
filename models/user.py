@@ -1,5 +1,6 @@
 from email.policy import default
 from schematics.models import Model
+from .problem import Problem
 from schematics.types import ListType, IntType, StringType, DictType, ModelType
 
 class User(Model):
@@ -11,6 +12,7 @@ class User(Model):
     cf_category_count = DictType(DictType(ListType(IntType, default=[])),default = {}, serialize_when_none=True)
     cf_solved_questions_id = ListType(StringType, default = [], serialize_when_none=True)
     cf_rating_changes = ListType(IntType, default = [], serialize_when_none = True)
+    recommended_questions = ListType(ModelType(Problem), default=[], serialize_when_none = True)
 
     class Options:
         serialize_when_none = True

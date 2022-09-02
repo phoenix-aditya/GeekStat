@@ -10,5 +10,7 @@ from .services import (
     check_if_id_in_collection,
     return_latest_doc_in_collection,
     return_doc_by_username,
-    update_document_by_username
+    update_document_by_username,
+    return_unique_values_in_field,
+    retrieve_question_set_of_category
 )
