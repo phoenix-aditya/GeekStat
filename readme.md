@@ -1,14 +1,5 @@
-APIS for the project Geekstat
+APIs for project GeekStat
 
-the APIS hosted are:
-generating cf user file
-recommending questions based on user stats
+make a config.py file while deploying and add MongoDb connection string as
 
-generating cf user file
-call the api on the url+"/genuser/"+cf_username
-suggesting questions
-call the api on the url+"/recommendq/"+cf_username
-
-the api call automatically generates userfile, so it isnt necessary to call userfile
-
-further 
+CONNECTION_STRING = "string here"
