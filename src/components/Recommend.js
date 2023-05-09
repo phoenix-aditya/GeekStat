@@ -8,7 +8,7 @@ import "./css/Recommend.css";
 /* Component import */
 
 /* Asset imports */
-const baseURL = "https://geekstat-api.herokuapp.com/";
+const baseURL = "http://127.0.0.1:8000/";
 
 function Recommend({ username, setUsername, dataSubmitted, setDataSubmitted }) {
   const [qData, setqData] = useState("no data");
@@ -16,7 +16,7 @@ function Recommend({ username, setUsername, dataSubmitted, setDataSubmitted }) {
   useEffect(() => {
 
     const getRecommendations = async () => {
-        let url = baseURL + "recommendq/" +  username ;
+        let url = baseURL + "update_recommended_questions/" +  username ;
         const {data} = await axios.get(url);
         setqData(data);
     }
