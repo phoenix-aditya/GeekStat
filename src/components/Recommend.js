@@ -18,7 +18,8 @@ function Recommend({ username, setUsername, dataSubmitted, setDataSubmitted }) {
     const getRecommendations = async () => {
         let url = baseURL + "update_recommended_questions/" +  username ;
         const {data} = await axios.get(url);
-        setqData(data);
+        console.log(data.data);
+        setqData(data.data);
     }
     getRecommendations();
 
@@ -26,7 +27,7 @@ function Recommend({ username, setUsername, dataSubmitted, setDataSubmitted }) {
 
   return <div className="Recommend">
       <h2>Questions</h2>
-     {(dataSubmitted && qData!=="no data" )? (qData.questions.map(ques=><a key={ques[0]} href={ques[3]} target="_blank">{ques[0]}</a>) ): "no data"}
+     {(dataSubmitted && qData!=="no data" )? (qData.map(ques=><a key={ques.pid} href={"https://codeforces.com/problemset/problem/"+ques.contestID+"/"+ques.index} target="_blank">{ques.name}</a>) ): "no data"}
   </div>;
 }
 
