@@ -1,0 +1,18 @@
+.baharWalaDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.container{
+    background-color: white;
+    margin: 1em;
+    width:  45vw;
+    /* padding: 1em; */
+}
+
+.smallContainer{
+    background-color: white;
+    margin: 1em;
+    width: 20vw;
+}

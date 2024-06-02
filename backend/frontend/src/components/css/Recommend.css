@@ -1,0 +1,28 @@
+.Recommend{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Recommend > h2{
+background-color: #222831;
+width: 100%;
+color: aliceblue;
+text-align: center;
+padding-top: 0.5em;
+padding-bottom: 0.5em;
+margin: 0;
+}
+
+.Recommend > a{
+    background-color: rgba(34, 40, 49, 0.89);
+    padding: 0.5em 0em;
+    color: whitesmoke;
+    text-decoration: none;
+    width: 100%;
+    border-bottom: 1px solid black; 
+    text-align: center;
+    
+}
+.Recommend > a:hover{
+    background-color: rgba(34, 40, 49, 0.8);
+}
